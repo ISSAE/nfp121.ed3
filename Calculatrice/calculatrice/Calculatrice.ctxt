@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Calculatrice
+comment1.params=
+comment1.target=Calculatrice()
+comment2.params=
+comment2.target=void\ initComposant()
+comment3.params=
+comment3.target=void\ calcul()
+numComments=4
