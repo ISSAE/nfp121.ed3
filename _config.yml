@@ -1,17 +1,17 @@
 remote_theme: ISSAE/architect
 
-name: Programmation Avancée TP0
+name: Programmation Avancée ED3
 
 author: Pascal Fares
 
 author_email: pascal.fares@isae.edu.lb
 
-title: TP introductif
+title: Programmation événementille et MVC Swing
 description: Programmation Avancée et Patron de conception en Java
 
 google_analytics: UA-29708002-2
 
-repository: ISSAE/nfp121.tp0
+repository: ISSAE/nfp121.ed3
 
 plugins:
   - jekyll-sitemap
