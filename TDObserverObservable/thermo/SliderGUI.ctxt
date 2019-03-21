@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.params=m\ h\ v
+comment0.target=SliderGUI(TemperatureModel,\ int,\ int)
+comment1.params=t\ o
+comment1.target=void\ update(Observable,\ Object)
+numComments=2

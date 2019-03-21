@@ -1,0 +1,128 @@
+<HTML>
+<HEAD>
+  <TITLE>Model-View-Controller</TITLE>
+</HEAD>
+<BODY>
+<H1>
+  Model-View-Controller
+</H1>
+<P>
+An importance advance in the design and implementation of interactive graphics
+applications was the development of the Model - View - Controller (MVC) paradigm.
+<P>
+This is not a programming language or even a code library. It is a way of
+thinking about and organizing the code in GUI-intensive systems. It is a
+particular instance of the general concept of 'modular programming.'
+<P>
+Like most good ideas, the concept of MVC is simple. You organize your application
+into two basic components:
+<UL>
+  <LI>
+    The model: this is the internal code and data structures for your application.
+    It is totally interface independent.
+  <LI>
+    The views and controllers: these are the interface 'widgets' that the user
+    sees and manipulates. Each view and controller is logically connected to
+    one or more pieces of model data.
+</UL>
+<P>
+A view is something that graphically displays one or more pieces of model
+data to the user. A view can be a number or string printed on screen, a
+thermometer, a gauge, a map, and so on.
+<P>
+A controller is something the user can manipulate to change model data. A
+controller can be a field you type into, an icon you drag around, a button
+you click, and so on.
+<P>
+Sometimes, the same graphical object is both a view and a controller. A scroll
+bar, for example, is a view that tells you where you are in a document.
+It&Otilde;s also a controller that lets you change where you are in the document.
+<P>
+Although the model-view-controller paradigm was developed in the context
+of graphical interfaces, it in fact applies to a text or text plus grpahics
+interface, such as your game manager project. In non-graphical programs,
+the views are whatever you print to indicate internal values. A view might
+be a table of numbers, a list of field names and field values, a graphical
+drawing of a game board, and so on. A controller would be anything your program
+presents to the user that lets them do things. Most typically this would
+be either a menu choice, e.g.,
+<PRE>
+Please pick a level:
+  1. Beginner
+  2. Avergae
+  3. Expert
+Enter level [1 - 3]:
+
+</PRE>
+<P>
+or a request for a value, e.g.,
+<PRE>
+What's your name: 
+
+
+How many bombs should I hide [2 - 10]: 
+
+</PRE>
+<P>
+</<h2>Examples
+<P>
+In a spreadsheet, the model is an array of numbers and formulas and formatting
+codes. The view is a grid with lines and text and graphics and so on. Each
+cell in the grid is a controller; clicking on a cell lets the user change
+the number or formula or format of that cell.
+<P>
+In a chess game, the model is an array specifying what pieces are where on
+the board, and some variables indicating what the score is, and whose turn
+it is. The view is a grid with graphical icons representing the various pieces.
+Each icon is a controller that the user can drag from one square to another.
+<H2>
+  How an MVC program works
+</H2>
+<P>
+An MVC-organized program works like this:
+<P>
+<IMG src="mvc.gif">
+<UL>
+  <LI>
+    The user interacts with the views and controllers.
+  <LI>
+    When the user manipulates a controller, a message is sent to change the data
+    in the model controlled by that controller.
+  <LI>
+    When data in model change, either because of internal calculations, user
+    action, or some separate event such as a clock tick, messages are sent to
+    the associated views to show the new values to the user.
+</UL>
+<P>
+Normally, a controller does not directly affect any view, except of course
+itself, if it&Otilde;s a view controller, such as a slider. A controller
+affects the model and the model updates the views. In this way, an important
+property is maintained: there is nothing important on the screen that is
+not represented in the model.
+<H2>
+  Advantages of MVC
+</H2>
+<P>
+The separation of code into model, views, and controllers has a number of
+benefits:
+<UL>
+  <LI>
+    Easier changes to interfaces: if we decide we want to put fancy borders on
+    a chessboard, use icons instead of letters for pieces, etc., all we change
+    is interface code. The model code remains untouched.
+  <LI>
+    Easier porting to other platforms: Interface code is highly platform-specific.
+    Every platform has different kinds of graphical objects, different models
+    of graphics, and so on. However, numbers and arrays are the same. When porting
+    to another platform, only the interface code has to change. The model code
+    usually ports without change.
+  <LI>
+    Easier debugging: Most serious bugs are in the model. Errors in logic show
+    up in bad calculations, unforeseen combinations of values, and so on. If
+    the model is a separate body of code, you can test it directly, using test
+    suites (files of example calls to model functions with expected return values).
+    In non-MVC designs, someone has to sit in front of the program and click
+    away all day, hoping to make the bug happen again.
+</UL>
+<P>
+</BODY></HTML>

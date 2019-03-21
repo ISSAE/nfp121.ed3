@@ -1,0 +1,316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+  <!--
+  This document was converted from RTF source: 
+  By rtftohtml 4.19
+  See http://www.sunpack.com/RTF
+  Filename:TIPatterns.rtf
+  Application Directory:c:\tools\rtf2html\
+  Subject:
+  Author:Bruce Eckel
+  Operator:Bruce Eckel
+  Document Comments:
+  Version Comments:
+  Comments:
+  Keywords:
+  Translation Date:09/08/2001
+  Translation Time:10:16:43
+  Translation Platform:Win32
+  Number of Output files:18
+  This File:Chapter11.html
+  SplitDepth=1
+  SkipNavPanel=1
+  SkipLeadingToc=1
+  SkipTrailingToc=1
+  GenContents=1
+  GenFrames=1
+  GenIndex=1
+  -->
+  <META http-equiv="Content-Type" content="text/html">
+  <TITLE>10: Callbacks</TITLE>
+</HEAD>
+<BODY alink="#ff3300" bgcolor="#ffffff" link="#3366ff" text="#000000" vlink="#cc00ff">
+<!-- Begin Navigational Guides -->
+<DIV align="right">
+</DIV>
+<P>
+<TABLE border="0" cellpadding="0" cellspacing="0" width="100%">
+  <TR>
+    <TD valign="top" width="100%"><BIG><BIG><BIG>10: Callbacks Bruce Eckel (Think
+      Java)</BIG></BIG></BIG>
+      <DIV align="left">
+	<FONT face="Georgia"><BIG><BIG><BIG>Decoupling code
+	behavior</BIG></BIG></BIG></FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<BIG><BIG>Observer</BIG></BIG>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">Like the other forms of callback, this contains a hook
+	point where you can change code. The difference is in the observer&#146;s
+	completely dynamic nature. It is often used for the specific case of changes
+	based on other object&#146;s change of state, but is also the basis of event
+	management. Anytime you want to decouple the source of the call from the
+	called code in a completely dynamic way.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">The
+	<A name="Index24"></A><A name="Index25"></A>observer pattern solves a fairly
+	common problem: What if a group of objects needs to update themselves when
+	some object changes state? This can be seen in the &#147;model-view&#148;
+	aspect of Smalltalk&#146;s MVC (model-view-controller), or the almost-equivalent
+	&#147;Document-View Architecture.&#148; Suppose that you have some data (the
+	&#147;document&#148;) and more than one view, say a plot and a textual view.
+	When you change the data, the two views must know to update themselves, and
+	that&#146;s what the observer facilitates. It&#146;s a common enough problem
+	that its solution has been made a part of the standard <B>java.util</B>
+	library.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">There are two types of objects used to implement the
+	observer pattern in Java. The <A name="Index26"></A><B>Observable</B> class
+	keeps track of everybody who wants to be informed when a change happens,
+	whether the &#147;state&#148; has changed or not. When someone says &#147;OK,
+	everybody should check and potentially update themselves,&#148; the
+	<B>Observable</B> class performs this task by calling the
+	<A name="Index27"></A><B>notifyObservers(&nbsp;)</B> method for each one
+	on the list. The <B>notifyObservers(&nbsp;)</B> method is part of the base
+	class <B>Observable</B>.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">There are actually two &#147;things that change&#148;
+	in the observer pattern: the quantity of observing objects and the way an
+	update occurs. That is, the observer pattern allows you to modify both of
+	these without affecting the surrounding code.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">------------- </FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia"><B>Observer</B> is an &#147;interface&#148; class that
+	only has one member function, <B>update(&nbsp;)</B>. This function is called
+	by the object that&#146;s being observed, when that object decides its time
+	to update all its observers. The arguments are optional; you could have an
+	<B>update(&nbsp;)</B> with no arguments and that would still fit the observer
+	pattern; however this is more general&#151;it allows the observed object
+	to pass the object that caused the update (since an <B>Observer </B>may be
+	registered with more than one observed object) and any extra information
+	if that&#146;s helpful, rather than forcing the <B>Observer</B> object to
+	hunt around to see who is updating and to fetch any other information it
+	needs.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">The &#147;observed object&#148; that decides when and
+	how to do the updating will be called the <B>Observable</B>.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia"><B>Observable</B> has a flag to indicate whether it&#146;s
+	been changed. In a simpler design, there would be no flag; if something happened,
+	everyone would be notified. The flag allows you to wait, and only notify
+	the <B>Observer</B>s when you decide the time is right. Notice, however,
+	that the control of the flag&#146;s state is <B>protected</B>, so that only
+	an inheritor can decide what constitutes a change, and not the end user of
+	the resulting derived <B>Observer</B> class.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">Most of the work is done in
+	<B>notifyObservers(&nbsp;)</B>. If the <B>changed</B> flag has not been set,
+	this does nothing. Otherwise, it first clears the <B>changed</B> flag so
+	repeated calls to <B>notifyObservers(&nbsp;)</B> won&#146;t waste time. This
+	is done before notifying the observers in case the calls to
+	<B>update(&nbsp;)</B> do anything that causes a change back to this
+	<B>Observable</B> object. Then it moves through the <B>set</B> and calls
+	back to the <B>update(&nbsp;)</B> member function of each <B>Observer</B>.
+	</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">At first it may appear that you can use an ordinary
+	<B>Observable</B> object to manage the updates. But this doesn&#146;t work;
+	to get an effect, you <I>must</I> inherit from <B>Observable</B> and somewhere
+	in your derived-class code call <B>setChanged(&nbsp;)</B>. This is the member
+	function that sets the &#147;changed&#148; flag, which means that when you
+	call <B>notifyObservers(&nbsp;)</B> all of the observers will, in fact, get
+	notified. <I>Where</I> you call <B>setChanged(&nbsp;)</B> depends on the
+	logic of your program.</FONT>
+      </DIV>
+      <P>
+      <A name="Heading92"></A><FONT face="Verdana"></FONT>
+      <H2 align="left">
+	A visual example of observers
+      </H2>
+      <DIV align="left">
+	<FONT face="Georgia">Boxes are placed in a grid on the screen and each one
+	is initialized to a random color. In addition, each box <B>implements</B>
+	the <B>Observer</B> interface and is registered with an <B>Observable</B>
+	object. When you click on a box, all of the other boxes are notified that
+	a change has been made because the <B>Observable</B> object automatically
+	calls each <B>Observer </B>object&#146;s <B>update(&nbsp;)</B> method. Inside
+	this method, the box checks to see if it&#146;s adjacent to the one that
+	was clicked, and if so it changes its color to match the clicked
+	box.</FONT><BR>
+      </DIV>
+      <BLOCKQUOTE>
+	<FONT size="+1"></FONT>
+	<PRE><FONT color="#009900"><BIG><BIG>//: c10:BoxObserver.java</BIG></BIG></FONT>
+<FONT color="#009900"><BIG><BIG>// Demonstration of Observer pattern using</BIG></BIG></FONT>
+<FONT color="#009900"><BIG><BIG>// Java's built-in observer classes.</BIG></BIG></FONT>
+<FONT color="#0000ff"><BIG><BIG>import</BIG></BIG></FONT><BIG><BIG> javax.swing.*;</BIG></BIG>
+<FONT color="#0000ff"><BIG><BIG>import</BIG></BIG></FONT><BIG><BIG> java.awt.*;</BIG></BIG>
+<FONT color="#0000ff"><BIG><BIG>import</BIG></BIG></FONT><BIG><BIG> java.awt.event.*;</BIG></BIG>
+<FONT color="#0000ff"><BIG><BIG>import</BIG></BIG></FONT><BIG><BIG> java.util.*;</BIG></BIG>
+<FONT color="#0000ff"><BIG><BIG>import</BIG></BIG></FONT><BIG><BIG> com.bruceeckel.swing.*;</BIG></BIG>
+
+<FONT color="#009900"><BIG><BIG>// You must inherit a new type of Observable:</BIG></BIG></FONT>
+<FONT color="#0000ff"><BIG><BIG>class</BIG></BIG></FONT><BIG><BIG> BoxObservable <FONT color="#0000ff">extends</FONT> Observable {</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">public</FONT> <FONT color="#0000ff">void</FONT> notifyObservers(Object b) {</BIG></BIG>
+<BIG><BIG>    <FONT color="#009900">// Otherwise it won't propagate changes:</FONT></BIG></BIG>
+<BIG><BIG>    setChanged();</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">super</FONT>.notifyObservers(b);</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>}</BIG></BIG>
+
+//--------------------------------------------------------------------------------------------------
+
+<FONT color="#0000ff"><BIG><BIG>public</BIG></BIG></FONT><BIG><BIG> <FONT color="#0000ff">class</FONT> BoxObserver <FONT color="#0000ff">extends</FONT> JFrame {</BIG></BIG>
+<BIG><BIG>  Observable notifier = <FONT color="#0000ff">new</FONT> BoxObservable();</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">public</FONT> BoxObserver(<FONT color="#0000ff">int</FONT> grid) {</BIG></BIG>
+<BIG><BIG>    setTitle(<FONT color="#004488">"Demonstrates Observer pattern"</FONT>);</BIG></BIG>
+<BIG><BIG>    Container cp = getContentPane();</BIG></BIG>
+<BIG><BIG>    cp.setLayout(<FONT color="#0000ff">new</FONT> GridLayout(grid, grid));</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">for</FONT>(<FONT color="#0000ff">int</FONT> x = 0; x &lt; grid; x++)</BIG></BIG>
+<BIG><BIG>      <FONT color="#0000ff">for</FONT>(<FONT color="#0000ff">int</FONT> y = 0; y &lt; grid; y++)</BIG></BIG>
+<BIG><BIG>        cp.add(<FONT color="#0000ff">new</FONT> OCBox(x, y, notifier));</BIG></BIG>
+<BIG><BIG>  }   </BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">public</FONT> <FONT color="#0000ff">static</FONT> <FONT color="#0000ff">void</FONT> main(String[] args) {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">int</FONT> grid = 16;</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">if</FONT>(args.length &gt; 0)</BIG></BIG>
+<BIG><BIG>      grid = Integer.parseInt(args[0]);</BIG></BIG>
+<BIG><BIG>    JFrame f = <FONT color="#0000ff">new</FONT> BoxObserver(grid);</BIG></BIG>
+<BIG><BIG>    f.setSize(500, 400);</BIG></BIG>
+<BIG><BIG>    f.setVisible(<FONT color="#0000ff">true</FONT>);</BIG></BIG>
+<BIG><BIG>    <FONT color="#009900">// JDK 1.3:</FONT></BIG></BIG>
+<BIG><BIG>    f.setDefaultCloseOperation(EXIT_ON_CLOSE);</BIG></BIG>
+<BIG><BIG>    <FONT color="#009900">// Add a WindowAdapter if you have JDK 1.2</FONT></BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>}</BIG></BIG>
+
+//-------------------------------------------------------------------------
+
+<FONT color="#0000ff"><BIG><BIG>class</BIG></BIG></FONT><BIG><BIG> OCBox <FONT color="#0000ff">extends</FONT> JPanel <FONT color="#0000ff">implements</FONT> Observer {</BIG></BIG>
+<BIG><BIG>  Observable notifier;</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">int</FONT> x, y; <FONT color="#009900">// Locations in grid</FONT></BIG></BIG>
+<BIG><BIG>  Color cColor = newColor();</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">static</FONT> <FONT color="#0000ff">final</FONT> Color[] colors = { </BIG></BIG>
+<BIG><BIG>    Color.black, Color.blue, Color.cyan, </BIG></BIG>
+<BIG><BIG>    Color.darkGray, Color.gray, Color.green,</BIG></BIG>
+<BIG><BIG>    Color.lightGray, Color.magenta, </BIG></BIG>
+<BIG><BIG>    Color.orange, Color.pink, Color.red, </BIG></BIG>
+<BIG><BIG>    Color.white, Color.yellow </BIG></BIG>
+<BIG><BIG>  };</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">static</FONT> <FONT color="#0000ff">final</FONT> Color newColor() {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">return</FONT> colors[</BIG></BIG>
+<BIG><BIG>      (<FONT color="#0000ff">int</FONT>)(Math.random() * colors.length)</BIG></BIG>
+<BIG><BIG>    ];</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>  OCBox(<FONT color="#0000ff">int</FONT> x, <FONT color="#0000ff">int</FONT> y, Observable notifier) {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">this</FONT>.x = x;</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">this</FONT>.y = y;</BIG></BIG>
+<BIG><BIG>    notifier.addObserver(<FONT color="#0000ff">this</FONT>);</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">this</FONT>.notifier = notifier;</BIG></BIG>
+<BIG><BIG>    addMouseListener(<FONT color="#0000ff">new</FONT> ML());</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">public</FONT> <FONT color="#0000ff">void</FONT> paintComponent(Graphics g) {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">super</FONT>.paintComponent(g);</BIG></BIG>
+<BIG><BIG>    g.setColor(cColor);</BIG></BIG>
+<BIG><BIG>    Dimension s = getSize();</BIG></BIG>
+<BIG><BIG>    g.fillRect(0, 0, s.width, s.height);</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">class</FONT> ML <FONT color="#0000ff">extends</FONT> MouseAdapter {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">public</FONT> <FONT color="#0000ff">void</FONT> mousePressed(MouseEvent e) {</BIG></BIG>
+<BIG><BIG>      notifier.notifyObservers(OCBox.<FONT color="#0000ff">this</FONT>);</BIG></BIG>
+<BIG><BIG>    }</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">public</FONT> <FONT color="#0000ff">void</FONT> update(Observable o, Object arg) {</BIG></BIG>
+<BIG><BIG>    OCBox clicked = (OCBox)arg;</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">if</FONT>(nextTo(clicked)) {</BIG></BIG>
+<BIG><BIG>      cColor = clicked.cColor;</BIG></BIG>
+<BIG><BIG>      repaint();</BIG></BIG>
+<BIG><BIG>    }</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>  <FONT color="#0000ff">private</FONT> <FONT color="#0000ff">final</FONT> <FONT color="#0000ff">boolean</FONT> nextTo(OCBox b) {</BIG></BIG>
+<BIG><BIG>    <FONT color="#0000ff">return</FONT> Math.abs(x - b.x) &lt;= 1 &amp;&amp; </BIG></BIG>
+<BIG><BIG>           Math.abs(y - b.y) &lt;= 1;</BIG></BIG>
+<BIG><BIG>  }</BIG></BIG>
+<BIG><BIG>} <FONT color="#009900">///:~</FONT></BIG></BIG>
+</PRE>
+      </BLOCKQUOTE>
+      <DIV align="left">
+	<FONT face="Georgia">When you first look at the online documentation for
+	<B>Observable</B>, it&#146;s a bit confusing because it appears that you
+	can use an ordinary <B>Observable</B> object to manage the updates. But this
+	doesn&#146;t work; try it&#151;inside <B>BoxObserver</B>, create an
+	<B>Observable</B> object instead of a <B>BoxObservable</B> object and see
+	what happens: nothing. To get an effect, you <I>must</I> inherit from
+	<B>Observable</B> and somewhere in your derived-class code call
+	<B>setChanged(&nbsp;)</B>. This is the method that sets the &#147;changed&#148;
+	flag, which means that when you call <B>notifyObservers(&nbsp;)</B> all of
+	the observers will, in fact, get notified. In the example above
+	<B>setChanged(&nbsp;)</B> is simply called within
+	<B>notifyObservers(&nbsp;)</B>, but you could use any criterion you want
+	to decide when to call <B>setChanged(&nbsp;)</B>. </FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia"><B>BoxObserver</B> contains a single <B>Observable
+	</B>object called <B>notifier</B>, and every time an <B>OCBox</B> object
+	is created, it is tied to <B>notifier</B>. In <B>OCBox</B>, whenever you
+	click the mouse the <B>notifyObservers(&nbsp;)</B> method is called, passing
+	the clicked object in as an argument so that all the boxes receiving the
+	message (in their <B>update(&nbsp;) </B>method) know who was clicked and
+	can decide whether to change themselves or not. Using a combination of code
+	in <B>notifyObservers(&nbsp;)</B> and <B>update(&nbsp;)</B> you can work
+	out some fairly complex schemes.</FONT><BR>
+      </DIV>
+      <DIV align="left">
+	<FONT face="Georgia">It might appear that the way the observers are notified
+	must be frozen at compile time in the <B>notifyObservers(&nbsp;)</B> method.
+	However, if you look more closely at the code above you&#146;ll see that
+	the only place in <B>BoxObserver</B> or <B>OCBox</B> where you're aware that
+	you&#146;re working with a <B>BoxObservable</B> is at the point of creation
+	of the <B>Observable </B>object&#151;from then on everything uses the basic
+	<B>Observable</B> interface. This means that you could inherit other
+	<B>Observable</B> classes and swap them at run time if you want to change
+	notification behavior then.</FONT><A name="_Toc524504166"></A><BR>
+      </DIV>
+      <P>
+      <A name="Heading93"></A><FONT face="Verdana"></FONT>
+      <H2 align="left">
+	Exercises
+      </H2>
+      <OL>
+	<LI>
+	  <FONT face="Verdana"> </FONT><FONT face="Georgia">Create a minimal
+	  Observer-Observable design in two classes. Just create the bare minimum in
+	  the two classes, then demonstrate your design by creating one
+	  <B>Observable</B> and many <B>Observer</B>s, and cause the <B>Observable</B>
+	  to update the <B>Observer</B>s.</FONT>
+	<LI>
+	  <FONT face="Verdana"> </FONT><FONT face="Georgia">Modify
+	  <B>BoxObserver.java</B> to turn it into a simple game. If any of the squares
+	  surrounding the one you clicked is part of a contiguous patch of the same
+	  color, then all the squares in that patch are changed to the color you clicked
+	  on. You can configure the game for competition between players or to keep
+	  track of the number of clicks that a single player uses to turn the field
+	  into a single color. You may also want to restrict a player's color to the
+	  first one that was chosen.</FONT>
+      </OL>
+      <DIV align="center">
+      </DIV>
+    </TD>
+  </TR>
+</TABLE>
+<P>
+<BR>
+  <HR>
+<P>
+</BODY></HTML>

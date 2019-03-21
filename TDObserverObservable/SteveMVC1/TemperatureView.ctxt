@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=TemperatureView()
+comment1.target=Dimension\ preferredSize()
+comment2.params=ob\ arg
+comment2.target=void\ update(Observable,\ Object)
+numComments=3

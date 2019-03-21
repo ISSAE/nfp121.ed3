@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=ThermometerView()
+comment1.target=Dimension\ preferredSize()
+comment2.params=g
+comment2.target=void\ paint(Graphics)
+comment3.params=ob\ arg
+comment3.target=void\ update(Observable,\ Object)
+numComments=4

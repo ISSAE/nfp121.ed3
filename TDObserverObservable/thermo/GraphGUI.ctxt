@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.params=model\ h\ v
+comment0.target=GraphGUI(TemperatureModel,\ int,\ int)
+comment1.params=obs\ o
+comment1.target=void\ update(Observable,\ Object)
+comment2.params=g
+comment2.target=void\ paint(Graphics)
+numComments=3

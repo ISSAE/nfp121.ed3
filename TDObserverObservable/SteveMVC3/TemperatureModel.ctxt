@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=TemperatureModel()
+comment1.params=temp
+comment1.target=TemperatureModel(int)
+comment2.params=f
+comment2.target=void\ setTemperature(int)
+comment3.target=int\ F()
+comment4.target=int\ C()
+comment5.target=int\ K()
+comment6.target=String\ toString()
+numComments=7

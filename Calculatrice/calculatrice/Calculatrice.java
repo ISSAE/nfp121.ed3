@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 public class Calculatrice extends JFrame {
     private JPanel container = new JPanel();
     //Tableau stockant les éléments à afficher dans la calculatrice
-    String[] tab_string = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "=", "C", "+", "-", "*", "/"};
+    String[] tab_string = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", 
+        ".", "=", "C", "+", "-", "*", "/"};
     //Un bouton par élément à afficher
     JButton[] tab_button = new JButton[tab_string.length];
     private JLabel ecran = new JLabel();
@@ -24,7 +25,7 @@ public class Calculatrice extends JFrame {
     private String operateur = "";
 
     public Calculatrice(){
-        this.setSize(240, 260);
+        this.setSize(260, 280);
         this.setTitle("Calculette");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);

@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.params=m
+comment0.target=CelsiusStrategy(TemperatureModel)
+comment1.params=d
+comment1.target=void\ set(double)
+comment2.target=double\ get()
+numComments=3

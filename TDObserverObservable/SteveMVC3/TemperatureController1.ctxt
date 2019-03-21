@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=TemperatureController1()
+comment1.target=Dimension\ preferredSize()
+comment2.params=evt\ arg
+comment2.target=boolean\ action(Event,\ Object)
+comment3.params=obs
+comment3.target=void\ addObserver(Observer)
+comment4.target=TemperatureModel\ getModel()
+numComments=5

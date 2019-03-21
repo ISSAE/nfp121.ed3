@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=double\ getF()
+comment1.target=double\ getC()
+comment2.params=tempF
+comment2.target=void\ setF(double)
+comment3.params=tempC
+comment3.target=void\ setC(double)
+numComments=4

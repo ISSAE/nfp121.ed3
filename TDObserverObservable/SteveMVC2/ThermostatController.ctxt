@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ThermostatController()
+comment1.params=g
+comment1.target=void\ paint(Graphics)
+comment2.params=evt\ x\ y
+comment2.target=boolean\ mouseDown(Event,\ int,\ int)
+comment3.params=evt\ x\ y
+comment3.target=boolean\ mouseDrag(Event,\ int,\ int)
+comment4.params=ob\ arg
+comment4.target=void\ update(Observable,\ Object)
+numComments=5

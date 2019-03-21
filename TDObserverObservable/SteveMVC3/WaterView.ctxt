@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=wm
+comment0.target=WaterView(WaterModel)
+comment1.target=void\ initColors()
+comment2.params=temp
+comment2.target=Color\ getColor(int)
+comment3.target=Dimension\ preferredSize()
+comment4.params=g
+comment4.target=void\ paint(Graphics)
+comment5.params=ob\ arg
+comment5.target=void\ update(Observable,\ Object)
+numComments=6

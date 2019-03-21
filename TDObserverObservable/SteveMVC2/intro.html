@@ -1,0 +1,123 @@
+<html><head><title>MVC Java: Introduction</title></head>
+<BODY BGCOLOR="#FFFFF0" TEXT="#000000" LINK="#0000FF" VLINK="#FF0000" >
+
+<small><A HREF="http://genome-www.stanford.edu/~sac/java/mvc/">Java MVC Page</A></small>
+
+<H1 align=center>The Java Dependency Mechanism and the MVC Approach</H1>
+<HR NOSHADE>
+<small><center> http://genome-www.stanford.edu/~sac/java/mvc/intro.html</center></small>
+<br>
+<small><b>References:</b>
+<ol><li>Geary, D (1997), <a href="http://www.sigs.com/">Java Report</a> 2(1):31-37.<br>
+    <li>Winston, PH and Narasimhan, S (1996), <a href="http://www.sigs.com/">Java Report</a> 1(6):63-68.<br>
+    <li>Lewis, S (1995), <i>The Art and Science of Smalltalk</i>, Hewlett-Packard.
+    <li><a href="http://java.sun.com/products/jdk/1.1/docs/">JDK 1.1 docs</a>
+</ol>
+</small>
+
+<dl>
+<dt><b>I. Relationships between objects in an application</b>
+  <ol><li>Is-A (inheritance)
+      <li>Has-A (composition)
+      <li>Depends-on (dependency)
+      <li>Instance-of (instantiation) 
+      </ol>
+
+<p>
+<dt><b>II. Defininitions</b>
+  <ul><li>Model: 
+     <ul type=disc><li>Contains data and core application functionality.
+	<li>Independent of the user interface (<b>UI</b>).
+	<li>Keywords: data, storage, processing.
+     </ul>
+  <li>View: 
+     <ul type=disc><li>Displays a model's data to the user.
+	<li>Does not understand or act on the data except as necessary to display it.
+	<li>Provides the "look" of an application.
+	<li>Keywords: output
+     </ul>
+  <li>Controller: 
+     <ul type=disc><li>Handles UI events and communicates them to the model.
+	<li>Usually is specialized to work with a particular view.
+	<li>Provides the "feel" of an application.
+	<li>Keywords: input
+     </ul>
+  <li>Observable:
+     <ul type=disc><li>A java.util class for a <b>model</b>.
+	<li>Contains a mechanism for notifying all observers upon changes in a model's data.
+	<li>An observable object knows which objects depend on it and notifys them
+	    upon changes to the model's data.
+	<li>Key methods: setChanged(), notifyObservers()
+     </ul>
+  <li>Observer:
+     <ul type=disc><li>A java.util interface for a <b>view</b>.
+	<li>Specifies a mechanism for reacting to changes in an observed model.
+	<li>An observer does not (necessarily) know on which objects it depends.
+	<li>An observer does have to display anything (ie. provide a view to a model).
+	<li>Key methods: update(Observable, Object)
+     </ul>
+  <li>EventListener:
+     <ul type=disc><li>A java.util interface for a <b>controller</b>.
+	<li>Specifies a mechanism for responding to UI events.
+	<li>Available only in JDK 1.1 (see docs about the <a href="http://java.sun.com/products/jdk/1.1/docs/guide/awt/designspec/events.html">delegation-based event model</a>).
+	<li>Key subclasses: MouseListener, ActionListener, FocusListener et al.
+     </ul>
+  </ul>
+
+<p>
+<dt><b>III. Graphical Illustration of Java Dependency and MVC</b>
+
+<p>
+<IMG SRC="mvc1.gif" alt=[MVC Diagram1] border=0>
+
+<p>
+<dt><b>IV. A Generic Scenario</b>
+  <ol><li>User generates an event by clicking a button or moving a scroll bar.
+      <li>Controller determines what happened and sends a setData(value) message to a model
+	  passing it a value computed based on what happened in the UI.
+      <li>Model sets/ alters its data accordingly.
+      <li>Model broadcasts to its dependents (views) that it has changed (calls
+ 	  setChanged() and notifyObservers()).
+      <li>Observer (view) receives an update message from the changed model and reacts
+	  appropriately (e.g, redraws its display to reflect the change in the model).
+  </ol>
+
+
+<p>
+<dt><b>V. Advantages and Disadvantages</b>
+	<p>
+  <ul type=disc><li><b>Advantages of dependency</b>
+     <ol><li>Dependents are updated transparently and automatically.
+	 <li>Allows an application to build its dependency network at run-time.
+	     For any given object, a programmer does not need to know which other objects or how many other
+ 	     objects depend on it.
+     </ol>
+	<p>
+  <li><b>Advantages of MVC</b>
+     <ol><li>Permits an orderly, methodical approach to GUI design.
+	<li>Decouples an application's data processing, visual representation, and GUI which
+	     promotes flexibility, modularity, encapsulation, and reuse. For example, 
+  	     a model could be fitted with different views, or an application could
+ 	     be used without its view to interact with another application.
+	<li>Permits separate, independent development of application components.
+	<li>Allows the different components of an application to inherit from different classes.
+	    This promotes encapsulation and compensates for Java's lack of multiple inheritance.
+     </ol>
+	<p>
+  <li><b>Disadvantages of Dependency and MVC</b>
+     <ol><li>Increased complexity requires more effort to design.
+ 	 <li>Creates a new potential source of bugs.
+ 	 <li>Messages between objects may be difficult to track.
+	 <li>Increased overhead of method calls between observables and observers could
+	     lead to inefficient code if not designed carefully.
+     </ol>
+
+</dl>
+
+<P><HR NOSHADE>
+<SMALL><B>
+Last Modified: 4 March 1997<br>
+<i><a href="mailto:sac@genome.stanford.edu">sac@genome.stanford.edu</a>.</i>
+</B></SMALL>
+
+</BODY></HTML>

@@ -12,4 +12,6 @@ Ah ! Ça faisait longtemps… Un petit ED/TP ! Dans celui-ci, nous allons - enfi
 * les interactions ;
 * les classes internes ;
 
-L'objectif est ici de réaliser une petite calculatrice basique.
+L'objectif est ici de réaliser une petite calculatrice basique. qui aura cet aspect
+
+![Calculatrice](img/calc.PNG)

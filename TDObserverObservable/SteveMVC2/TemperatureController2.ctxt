@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=TemperatureController2()
+comment1.target=Dimension\ preferredSize()
+comment2.params=obs
+comment2.target=void\ addObserver(Observer)
+comment3.target=TemperatureModel\ getModel()
+comment4.target=void\ resetModel()
+comment5.params=evt\ x\ y
+comment5.target=boolean\ mouseDown(Event,\ int,\ int)
+comment6.params=g
+comment6.target=void\ paint(Graphics)
+numComments=7

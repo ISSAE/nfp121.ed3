@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.params=tempF
+comment0.target=WaterModel(int)
+comment1.params=tempF
+comment1.target=void\ setState(int)
+comment2.target=String\ state()
+comment3.params=scale
+comment3.target=int\ temperature(String)
+comment4.params=ob\ arg
+comment4.target=void\ update(Observable,\ Object)
+comment5.target=String\ toString()
+numComments=6

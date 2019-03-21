@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.params=label\ model\ h\ v
+comment0.target=TemperatureGUI(String,\ TemperatureModel,\ int,\ int)
+comment1.params=s
+comment1.target=void\ setDisplay(String)
+comment2.target=double\ getDisplay()
+comment3.params=a
+comment3.target=void\ addDisplayListener(ActionListener)
+comment4.params=a
+comment4.target=void\ addUpListener(ActionListener)
+comment5.params=a
+comment5.target=void\ addDownListener(ActionListener)
+comment6.target=TemperatureModel\ model()
+numComments=7
