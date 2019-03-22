@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=MultiplicationListener
+comment0.text=\r\n\ D\u00E9crivez\ votre\ classe\ MultiplicationListener\ ici.\r\n\r\n\ @author\ (votre\ nom)\r\n\ @version\ (un\ num\u00E9ro\ de\ version\ ou\ une\ date)\r\n
+comment1.params=bbg
+comment1.target=MultiplicationListener(MultGUI)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3
