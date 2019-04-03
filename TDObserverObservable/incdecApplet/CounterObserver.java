@@ -1,6 +1,6 @@
 interface CounterObserver
 {
 
-public void counterHasChanged(Counter ctr);
+    public void counterHasChanged(Counter ctr);
 
 }

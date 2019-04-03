@@ -1,4 +1,5 @@
 #BlueJ class context
-comment0.params=ctr
-comment0.target=void\ counterHasChanged(Counter)
-numComments=1
+comment0.target=CounterObserver
+comment1.params=ctr
+comment1.target=void\ counterHasChanged(Counter)
+numComments=2

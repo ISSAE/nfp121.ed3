@@ -1,7 +1,11 @@
 #BlueJ class context
-comment0.target=void\ init()
-comment1.params=e
-comment1.target=void\ actionPerformed(ActionEvent)
-comment2.params=ctr
-comment2.target=void\ counterHasChanged(Counter)
-numComments=3
+comment0.target=CounterApplet
+comment1.params=
+comment1.target=CounterApplet()
+comment2.params=
+comment2.target=void\ init()
+comment3.params=e
+comment3.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment4.params=ctr
+comment4.target=void\ counterHasChanged(Counter)
+numComments=5
