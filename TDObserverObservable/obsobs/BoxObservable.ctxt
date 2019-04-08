@@ -1,4 +1,5 @@
 #BlueJ class context
-comment0.params=b
-comment0.target=void\ notifyObservers(Object)
-numComments=1
+comment0.target=BoxObservable
+comment1.params=b
+comment1.target=void\ notifyObservers(java.lang.Object)
+numComments=2

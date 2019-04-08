@@ -13,12 +13,17 @@ import java.util.*;
 
 
 /*----------------------------------------------------*/
-public class ThermometerMVC1 extends java.applet.Applet 
+public class ThermometerMVC1 extends Frame 
 /*----------------------------------------------------*/
 {
   private TemperatureView        tempView;
   private TemperatureController1 tempController;
 
+  public ThermometerMVC1() {
+      init();
+      setVisible(true);
+    }
+  
   public void init() 
     { 
       tempView       = new TemperatureView();
@@ -45,7 +50,7 @@ public class ThermometerMVC1 extends java.applet.Applet
       p_controller.setLayout( new BorderLayout());
       p_controller.add("North", new Label("Controller"));
       p_controller.add("Center",tempController);
-
+      setLayout(new FlowLayout());
       add( p_model);
       add( p_view);
       add( p_controller);

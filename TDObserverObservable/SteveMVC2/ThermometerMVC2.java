@@ -14,7 +14,7 @@ import java.util.*;
 
 
 /*-----------------------------------------------------*/
-public class ThermometerMVC2 extends java.applet.Applet 
+public class ThermometerMVC2 extends Frame 
 /*-----------------------------------------------------*/
 {
   //These two views 'view' the same model.
@@ -24,7 +24,10 @@ public class ThermometerMVC2 extends java.applet.Applet
   //These two controllers control both views (but they don't have to.)
   private SwitchController     switchControl;
   private ThermostatController thermostatControl;
-
+  public ThermometerMVC2() {
+      init();
+      setVisible(true);
+    }
   public void init() 
     { 
       tempView          = new TemperatureView();
@@ -65,6 +68,7 @@ public class ThermometerMVC2 extends java.applet.Applet
       p_controller2.add("North", new Label("Controller2"));
       p_controller2.add("East",thermostatControl);
 
+      setLayout(new FlowLayout());
       add( p_model);
       add( p_view1);
       add( p_view2);

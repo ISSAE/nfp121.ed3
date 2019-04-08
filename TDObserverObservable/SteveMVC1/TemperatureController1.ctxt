@@ -1,9 +1,14 @@
 #BlueJ class context
-comment0.target=TemperatureController1()
-comment1.target=Dimension\ preferredSize()
-comment2.params=evt\ arg
-comment2.target=boolean\ action(Event,\ Object)
-comment3.params=obs
-comment3.target=void\ addObserver(Observer)
-comment4.target=TemperatureModel\ getModel()
-numComments=5
+comment0.target=TemperatureController1
+comment0.text=------------------------------------------
+comment1.params=
+comment1.target=TemperatureController1()
+comment2.params=
+comment2.target=java.awt.Dimension\ preferredSize()
+comment3.params=evt\ arg
+comment3.target=boolean\ action(java.awt.Event,\ java.lang.Object)
+comment4.params=obs
+comment4.target=void\ addObserver(java.util.Observer)
+comment5.params=
+comment5.target=TemperatureModel\ getModel()
+numComments=6

@@ -1,6 +1,7 @@
 #BlueJ class context
-comment0.params=grid
-comment0.target=BoxObserver(int)
-comment1.params=args
-comment1.target=void\ main(String[])
-numComments=2
+comment0.target=BoxObserver
+comment1.params=grid
+comment1.target=BoxObserver(int)
+comment2.params=args
+comment2.target=void\ main(java.lang.String[])
+numComments=3

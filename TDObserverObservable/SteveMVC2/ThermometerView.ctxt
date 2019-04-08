@@ -1,8 +1,12 @@
 #BlueJ class context
-comment0.target=ThermometerView()
-comment1.target=Dimension\ preferredSize()
-comment2.params=g
-comment2.target=void\ paint(Graphics)
-comment3.params=ob\ arg
-comment3.target=void\ update(Observable,\ Object)
-numComments=4
+comment0.target=ThermometerView
+comment0.text=------------------------------------------------------
+comment1.params=
+comment1.target=ThermometerView()
+comment2.params=
+comment2.target=java.awt.Dimension\ preferredSize()
+comment3.params=g
+comment3.target=void\ paint(java.awt.Graphics)
+comment4.params=ob\ arg
+comment4.target=void\ update(java.util.Observable,\ java.lang.Object)
+numComments=5

@@ -1,11 +1,13 @@
 #BlueJ class context
-comment0.target=Color\ newColor()
-comment1.params=x\ y\ notifier
-comment1.target=OCBox(int,\ int,\ Observable)
-comment2.params=g
-comment2.target=void\ paintComponent(Graphics)
-comment3.params=o\ arg
-comment3.target=void\ update(Observable,\ Object)
-comment4.params=b
-comment4.target=boolean\ nextTo(OCBox)
-numComments=5
+comment0.target=OCBox
+comment1.params=
+comment1.target=java.awt.Color\ newColor()
+comment2.params=x\ y\ notifier
+comment2.target=OCBox(int,\ int,\ java.util.Observable)
+comment3.params=g
+comment3.target=void\ paintComponent(java.awt.Graphics)
+comment4.params=o\ arg
+comment4.target=void\ update(java.util.Observable,\ java.lang.Object)
+comment5.params=b
+comment5.target=boolean\ nextTo(OCBox)
+numComments=6
