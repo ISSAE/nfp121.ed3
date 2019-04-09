@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=SwitchController
+comment0.text=----------------------------------------------------
+comment1.params=
+comment1.target=SwitchController()
+comment2.params=g
+comment2.target=void\ paintComponent(java.awt.Graphics)
+comment3.params=e
+comment3.target=void\ mousePressed(java.awt.event.MouseEvent)
+comment4.params=e
+comment4.target=void\ mouseReleased(java.awt.event.MouseEvent)
+comment5.params=e
+comment5.target=void\ mouseDragged(java.awt.event.MouseEvent)
+numComments=6

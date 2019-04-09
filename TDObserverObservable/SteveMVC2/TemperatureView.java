@@ -1,10 +1,11 @@
 
 import java.awt.*;
 import java.util.*;
+import javax.swing.JLabel;
 
 
 /*------------------------------------------------------*/
-class TemperatureView extends Label implements Observer 
+class TemperatureView extends JLabel implements Observer 
 /*------------------------------------------------------*/
 {
   private Dimension preferredSize = new Dimension(350,20);

@@ -10,13 +10,19 @@
 */
 
 import java.awt.*;
-import java.util.*;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 
 
 /*-----------------------------------------------------*/
-public class ThermometerMVC2 extends Frame 
+public class ThermometerMVC2 extends JFrame 
 /*-----------------------------------------------------*/
 {
+    Container container;
   //These two views 'view' the same model.
   private TemperatureView       tempView;
   private ThermometerView       thermView;
@@ -25,8 +31,8 @@ public class ThermometerMVC2 extends Frame
   private SwitchController     switchControl;
   private ThermostatController thermostatControl;
   public ThermometerMVC2() {
+      container=getContentPane();
       init();
-      setVisible(true);
     }
   public void init() 
     { 
@@ -37,52 +43,74 @@ public class ThermometerMVC2 extends Frame
 
       setFont(new Font("Helvetica",Font.BOLD, 16));
       setForeground(Color.black);
-      add( new Label("ThermometerMVC2: Illustrating the Model-View-Controller in Java"));
-      add( new Label("Two interacting controllers with shared views."));
+      add( new Label("ThermometerMVC2:  Model-View-Controller in Java"));
+      add( new Label("Vue partagée 2 interactions"));
 
-      Panel p_model = new Panel();
+      //Penl model
+      JPanel p_model = new JPanel();
       p_model.setLayout( new BorderLayout());
-      p_model.add("North", new Label("Model"));
+      p_model.add("North", new JLabel("Model"));
       TextArea ta = new TextArea(switchControl.getModel().toString(),5,40);
       ta.setFont( new Font("Helvetica",Font.PLAIN, 14));
       ta.setEditable( false);
       p_model.add("Center",ta);
 
-      Panel p_view1 = new Panel();
+      //View1
+      JPanel p_view1 = new JPanel();
       p_view1.setLayout( new BorderLayout());
-      p_view1.add("North", new Label("View1"));
+      p_view1.add("North", new JLabel("View1"));
       p_view1.add("Center",tempView);
 
-      Panel p_view2 = new Panel();
+      //View2
+      JPanel p_view2 = new JPanel();
       p_view2.setLayout( new BorderLayout());
-      p_view2.add("North", new Label("View2"));
+      p_view2.add("North", new JLabel("View2"));
       p_view2.add("Center",thermView);
 
-      Panel p_controller1 = new Panel();
+      //Controler1 
+      JPanel p_controller1 = new JPanel();
       p_controller1.setLayout( new BorderLayout());
-      p_controller1.add("North", new Label("Controller1"));
+      p_controller1.add("North", new JLabel("Controller1"));
       p_controller1.add("Center",switchControl);
 
-      Panel p_controller2 = new Panel();
+      //Controler 2
+      JPanel p_controller2 = new JPanel();
       p_controller2.setLayout( new BorderLayout());
-      p_controller2.add("North", new Label("Controller2"));
+      p_controller2.add("North", new JLabel("Controller2"));
       p_controller2.add("East",thermostatControl);
 
-      setLayout(new FlowLayout());
-      add( p_model);
-      add( p_view1);
-      add( p_view2);
-      add( p_controller1);
-      add( p_controller2);
+
+      container.setLayout(new FlowLayout());
+      container.add( p_model);
+      container.add( p_view1);
+      container.add( p_view2);
+      container.add( p_controller1);
+      container.add( p_controller2);
 
       switchControl.addObserver(tempView);
       switchControl.addObserver(thermView);
+      switchControl.addMouseListener(switchControl);
+      switchControl.addMouseMotionListener(switchControl);
       thermostatControl.addObserver(tempView);
       thermostatControl.addObserver(thermView);
+      thermostatControl.addMouseListener(thermostatControl);
+      thermostatControl.addMouseMotionListener(thermostatControl);
       //Link the two controllers: the thermostat should update as a result of switch events.
       switchControl.addObserver(thermostatControl); 
       switchControl.resetModel();  //To initialize the views.
     }
+  
+  public static void main (String ...args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+       LookAndFeelInfo[] plafs = UIManager.getInstalledLookAndFeels();
+       for (LookAndFeelInfo info : plafs) {
+           System.out.println(info);
+       }
+       UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+      JFrame jf=new ThermometerMVC2();
+      //jf.setPreferredSize(new Dimension(200, 100));
+      jf.setBounds(300, 300, 500, 500);
+      jf.setVisible(true);
+  }
 }
 
 

@@ -5,4 +5,6 @@ comment1.params=
 comment1.target=ThermometerMVC2()
 comment2.params=
 comment2.target=void\ init()
-numComments=3
+comment3.params=args
+comment3.target=void\ main(java.lang.String[])
+numComments=4
